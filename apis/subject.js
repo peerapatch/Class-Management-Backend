@@ -53,7 +53,9 @@ router.put('/api/subject/editSubject/:id', async (req, res) => {
     capacity: req.body.capacity,
     lecturer: req.body.lecturer,
     major: req.body.major,
-    classroom: req.body.classroom
+    classroom: req.body.classroom,
+    period: req.body.period,
+    remark: req.body.remark
   }
 
   console.log(update)
