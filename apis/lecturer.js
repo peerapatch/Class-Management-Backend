@@ -1,10 +1,10 @@
-const router = require("express").Router()
-const Subject = require("../schemas/lecturer")
+const router = require('express').Router()
+const Subject = require('../schemas/lecturer')
 
-router.get("/api/lecturer", (req, res) => {
-    Subject.find({}, function (err, users) {
-          res.send({ users: users })
-    })
+router.get('/api/lecturer', (req, res) => {
+  Subject.find({}, function (err, users) {
+    res.send({ users: users })
+  })
 })
 
 // router.get("/api/subject/:id", (req, res) => {
@@ -17,49 +17,46 @@ router.get("/api/lecturer", (req, res) => {
 //     })
 // })
 
-router.post("/api/lecturer", (req, res) => {
-      console.log("req.body",req.body)
-      Subject.create({
-            Firstname: req.body.Firstname,
-            Lastname: req.body.Lastname,
-            Department: req.body.Department,
-            Type: req.body.Type,
-            
-      })
-      res.send("create success")
+router.post('/api/lecturer', (req, res) => {
+  console.log('req.body', req.body)
+  Subject.create({
+    Firstname: req.body.Firstname,
+    Lastname: req.body.Lastname,
+    Department: req.body.Department,
+    Type: req.body.Type
+
+  })
+  res.send('create success')
 })
 
-
-
-router.put("/api/lecturer", async (req, res) => {
-      const query = { _id: req.body._id }
-      const update = {
-            Firstname: req.body.Firstname,
-            Lastname: req.body.Lastname,
-            Department: req.body.Department,
-            Type: req.body.Type
-            
-      }
-      const test = await Subject.findOneAndUpdate(
-            query,
-            update
-      )
-      if (test) {
-            return res.status(200).send("update success")
-      } else {
-            return res.status(400).send("update fail")
-      }
-
+router.put('/api/lecturer/:id', async (req, res) => {
+  const query = { _id: req.params.id }
+  const update = {
+    Firstname: req.body.Firstname,
+    Lastname: req.body.Lastname,
+    Department: req.body.Department,
+    Type: req.body.Type
+  }
+  const test = await Subject.findOneAndUpdate(
+    query,
+    update
+  )
+  if (test) {
+    return res.status(200).send('update success')
+  } else {
+    return res.status(400).send('update fail')
+  }
 })
 
-router.delete("/api/lecturer", async (req, res) => {
-      const query = { _id: req.body._id }
-      const test = await Subject.findOneAndDelete(query)
-      if (test) {
-            return res.status(200).send("Delete Success")
-      } else {
-            return res.status(400).send("Delete Fail")
-      }
+router.delete('/api/lecturer/:id', async (req, res) => {
+  const query = { _id: req.params.id }
+  console.log(query)
+  const test = await Subject.findOneAndDelete(query)
+  if (test) {
+    return res.status(200).send('Delete Success')
+  } else {
+    return res.status(400).send('Delete Fail')
+  }
 })
 
 module.exports = router
