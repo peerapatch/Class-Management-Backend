@@ -20,9 +20,9 @@ router.get('/api/major', (req, res) => {
 router.post('/api/major', (req, res) => {
   console.log('req.body', req.body)
   Subject.create({
-    Majorname: req.body.Majorname,
-    Department: req.body.Department,
-    Year: req.body.Year
+    faculty: req.body.faculty,
+    major: req.body.major,
+    year: req.body.year
 
   })
   res.send('create success')
@@ -31,9 +31,9 @@ router.post('/api/major', (req, res) => {
 router.put('/api/major', async (req, res) => {
   const query = { _id: req.body._id }
   const update = {
-    Majorname: req.body.Majorname,
-    Department: req.body.Department,
-    Year: req.body.Year
+    faculty: req.body.faculty,
+    major: req.body.major,
+    year: req.body.year
 
   }
   const test = await Subject.findOneAndUpdate(
@@ -47,8 +47,10 @@ router.put('/api/major', async (req, res) => {
   }
 })
 
-router.delete('/api/major', async (req, res) => {
-  const query = { _id: req.body._id }
+router.delete('/api/major/:id', async (req, res) => {
+  console.log(req.params.id)
+  const query = { _id: req.params.id }
+  console.log(query)
   const test = await Subject.findOneAndDelete(query)
   if (test) {
     return res.status(200).send('Delete Success')
