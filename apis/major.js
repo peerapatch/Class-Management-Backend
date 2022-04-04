@@ -28,8 +28,9 @@ router.post('/api/major', (req, res) => {
   res.send('create success')
 })
 
-router.put('/api/major', async (req, res) => {
-  const query = { _id: req.body._id }
+router.put('/api/major/:id', async (req, res) => {
+  console.log(req.params.id)
+  const query = { _id: req.params.id }
   const update = {
     faculty: req.body.faculty,
     major: req.body.major,
