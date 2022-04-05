@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Subject = require('../schemas/subject')
-
+const Major = require('../schemas/major')
+const Lecturer = require('../schemas/lecturer')
 router.get('/api/subject', async (req, res) => {
   const result = await Subject.find({})
   if (result) {
@@ -78,6 +79,24 @@ router.delete('/api/subject/:id', async (req, res) => {
     return res.status(200).send('Delete Success')
   } else {
     return res.status(400).send('Delete Fail')
+  }
+})
+/// *
+router.get('/api/subject/get_major_by_faculty', async (req, res) => {
+  const result = await Major.find({ faculty: req.body.faculty })
+  if (result) {
+    return res.status(200).send({ data: result })
+  } else {
+    return res.status(400).send({ data: result })
+  }
+})
+
+router.get('/api/lecturer/get_lecturer_by_faculty', async (req, res) => {
+  const result = await Lecturer.find({ Department: req.body.faculty })
+  if (result) {
+    return res.status(200).send({ data: result })
+  } else {
+    return res.status(400).send({ data: result })
   }
 })
 
