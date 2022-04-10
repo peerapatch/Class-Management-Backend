@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const Subject = require('../schemas/subject')
-const Major = require('../schemas/major')
-const Lecturer = require('../schemas/lecturer')
+
 router.get('/api/subject', async (req, res) => {
   const result = await Subject.find({})
   if (result) {
@@ -22,21 +21,25 @@ router.get('/api/subject', async (req, res) => {
 // })
 
 router.post('/api/subject', async (req, res) => {
-  console.log('req.body', req.body)
-  const result = await Subject.create({
-    code: req.body.code,
-    name: req.body.name,
-    credit: req.body.credit,
-    section: req.body.section,
-    capacity: req.body.capacity,
-    lecturer: req.body.lecturer,
-    major: req.body.major,
-    remark: req.body.remark,
-    period: req.body.period
-    // classroom: req.body.classroom,
-    // timeStart: new Date(),
-    // timeEnd: new Date()
-  })
+
+
+  const result = await Subject.create(
+
+
+    {
+
+      "major": req.body.major,
+      "faculty": req.body.faculty,
+      "subject_code": req.body.subject_code,
+      "subject_name": req.body.subject_name,
+      "lecturer": req.body.lecturer_name,
+      "section": req.body.section,
+      "credit": req.body.credit,
+      "period": req.body.period,
+      "remark": req.body.remark,
+    }
+
+  )
   if (result) {
     return res.status(200).send({ result: result })
   } else {
@@ -45,18 +48,21 @@ router.post('/api/subject', async (req, res) => {
 })
 
 router.put('/api/subject/editSubject/:id', async (req, res) => {
-  console.log(req.params.id)
+
   const update = {
-    code: req.body.code,
+    subject_code: req.body.subject_code,
     name: req.body.name,
     credit: req.body.credit,
     section: req.body.section,
     capacity: req.body.capacity,
     lecturer: req.body.lecturer,
+    faculty: req.body.faculty,
     major: req.body.major,
-    classroom: req.body.classroom,
+    remark: req.body.remark,
     period: req.body.period,
-    remark: req.body.remark
+    classroom: req.body.classroom,
+    time_start: req.body.time_start,
+    time_end: req.body.time_end
   }
 
   console.log(update)
@@ -82,22 +88,6 @@ router.delete('/api/subject/:id', async (req, res) => {
   }
 })
 /// *
-router.get('/api/subject/get_major_by_faculty', async (req, res) => {
-  const result = await Major.find({ faculty: req.body.faculty })
-  if (result) {
-    return res.status(200).send({ data: result })
-  } else {
-    return res.status(400).send({ data: result })
-  }
-})
 
-router.get('/api/lecturer/get_lecturer_by_faculty', async (req, res) => {
-  const result = await Lecturer.find({ Department: req.body.faculty })
-  if (result) {
-    return res.status(200).send({ data: result })
-  } else {
-    return res.status(400).send({ data: result })
-  }
-})
 
 module.exports = router

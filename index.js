@@ -2,16 +2,18 @@
 const express = require('express')
 const cors = require('cors')
 // const hostname = '127.0.0.1'
-
+const bp = require('body-parser');
 const Mongoose = require('mongoose')
 const app = express()
-const mongoUrl = 'mongodb+srv://classSchedule:classSchedule2565@cluster0.tti87.mongodb.net/Schedule?retryWrites=true&w=majority'
+const mongoUrl = 'mongodb://classSchedule:classSchedule2565@cluster0-shard-00-00.tti87.mongodb.net:27017,cluster0-shard-00-01.tti87.mongodb.net:27017,cluster0-shard-00-02.tti87.mongodb.net:27017/Schedule?ssl=true&replicaSet=atlas-8hfb5u-shard-0&authSource=admin&retryWrites=true&w=majority'
 const opts = { useNewUrlParser: true, useUnifiedTopology: true }
 const corsOptions = {
   origin: '*'
 }
+app.use(express.urlencoded({ extended: false }));
 
 app.use(cors(corsOptions))
+
 
 Mongoose.connect(mongoUrl, opts)
   .then(() => {
@@ -36,3 +38,4 @@ app.use(require('./apis/classroom'))
 app.use(require('./apis/major'))
 app.use(require('./apis/schedule'))
 app.use(require('./apis/user'))
+app.use(require('./apis/utils'))

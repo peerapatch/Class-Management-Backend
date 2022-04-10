@@ -1,11 +1,9 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 const classroomSchema = new Schema({
-  // subjectID: [{ type: Schema.Types.ObjectId, ref: 'Subject' }],
-  classroomID: String,
+  classroom_no: String,
   capacity: Number,
-  type: String,
-  accessory: Array
-
+  type: Number,
+  accessories: Array
 })
 module.exports = mongoose.model('classroom', classroomSchema)

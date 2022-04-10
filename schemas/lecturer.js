@@ -2,10 +2,10 @@ const mongoose = require("mongoose")
 const { Schema } = mongoose
 
 const lecturerSchema = new Schema({
-    Firstname: String,
-    Lastname: String,
-    Department: String,
-    Type: String,
+    first_name: String,
+    last_name: String,
+    faculty: String,
+    type: Number,
 })
 
 

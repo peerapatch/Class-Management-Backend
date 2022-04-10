@@ -1,25 +1,15 @@
 const router = require('express').Router()
-const Subject = require('../schemas/major')
+const Major = require('../schemas/major')
 
 router.get('/api/major', (req, res) => {
-  Subject.find({}, function (err, users) {
-    res.send({ users: users })
+  Major.find({}, function (err, result) {
+    res.send({ data: result })
   })
 })
 
-// router.get("/api/subject/:id", (req, res) => {
-//     Subject.findOne({ _id: req.params.id }).populate('chapterID').exec(function (err, user) {
-//           if (user) {
-//                 res.send(user)
-//           } else {
-//                 res.status(400).send("not found user")
-//           }
-//     })
-// })
-
 router.post('/api/major', (req, res) => {
   console.log('req.body', req.body)
-  Subject.create({
+  Major.create({
     faculty: req.body.faculty,
     major: req.body.major,
     year: req.body.year
@@ -37,7 +27,7 @@ router.put('/api/major/:id', async (req, res) => {
     year: req.body.year
 
   }
-  const test = await Subject.findOneAndUpdate(
+  const test = await Major.findOneAndUpdate(
     query,
     update
   )
@@ -52,7 +42,7 @@ router.delete('/api/major/:id', async (req, res) => {
   console.log(req.params.id)
   const query = { _id: req.params.id }
   console.log(query)
-  const test = await Subject.findOneAndDelete(query)
+  const test = await Major.findOneAndDelete(query)
   if (test) {
     return res.status(200).send('Delete Success')
   } else {

@@ -1,14 +1,14 @@
 const router = require("express").Router()
-const Subject = require("../schemas/user")
+const User = require("../schemas/user")
 
 router.get("/api/user", (req, res) => {
-    Subject.find({}, function (err, users) {
+    User.find({}, function (err, users) {
           res.send({ users: users })
     })
 })
 
-// router.get("/api/subject/:id", (req, res) => {
-//     Subject.findOne({ _id: req.params.id }).populate('chapterID').exec(function (err, user) {
+// router.get("/api/User/:id", (req, res) => {
+//     User.findOne({ _id: req.params.id }).populate('chapterID').exec(function (err, user) {
 //           if (user) {
 //                 res.send(user)
 //           } else {
@@ -19,7 +19,7 @@ router.get("/api/user", (req, res) => {
 
 router.post("/api/user", (req, res) => {
       console.log("req.body",req.body)
-      Subject.create({
+      User.create({
         Username: req.body.Username,
         Password: req.body.Password,
         Email: req.body.Email,
@@ -40,7 +40,7 @@ router.put("/api/user", async (req, res) => {
             Tel: req.body.Tel
             
       }
-      const test = await Subject.findOneAndUpdate(
+      const test = await User.findOneAndUpdate(
             query,
             update
       )
@@ -54,7 +54,7 @@ router.put("/api/user", async (req, res) => {
 
 router.delete("/api/user", async (req, res) => {
       const query = { _id: req.body._id }
-      const test = await Subject.findOneAndDelete(query)
+      const test = await User.findOneAndDelete(query)
       if (test) {
             return res.status(200).send("Delete Success")
       } else {
