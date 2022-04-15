@@ -21,22 +21,19 @@ router.get('/api/subject', async (req, res) => {
 // })
 
 router.post('/api/subject', async (req, res) => {
-
-
   const result = await Subject.create(
-
 
     {
 
-      "major": req.body.major,
-      "faculty": req.body.faculty,
-      "subject_code": req.body.subject_code,
-      "subject_name": req.body.subject_name,
-      "lecturer": req.body.lecturer_name,
-      "section": req.body.section,
-      "credit": req.body.credit,
-      "period": req.body.period,
-      "remark": req.body.remark,
+      major: req.body.major,
+      faculty: req.body.faculty,
+      subject_code: req.body.subject_code,
+      subject_name: req.body.subject_name,
+      lecturer: req.body.lecturer_name,
+      section: req.body.section,
+      credit: req.body.credit,
+      period: req.body.period,
+      remark: req.body.remark
     }
 
   )
@@ -48,7 +45,6 @@ router.post('/api/subject', async (req, res) => {
 })
 
 router.put('/api/subject/editSubject/:id', async (req, res) => {
-
   const update = {
     subject_code: req.body.subject_code,
     name: req.body.name,
@@ -88,6 +84,5 @@ router.delete('/api/subject/:id', async (req, res) => {
   }
 })
 /// *
-
 
 module.exports = router
