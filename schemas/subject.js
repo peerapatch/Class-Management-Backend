@@ -8,10 +8,10 @@ const subjectSchema = new Schema({
   section: { type: Number },
   capacity: { type: Number },
   lecturer: { type: String },
-  faculty : {type : String},
+  faculty: { type: String },
   major: { type: String },
   period: { type: Array },
-  remark: { type: String },
+  remark: { type: String }
 
 })
 module.exports = mongoose.model('subject', subjectSchema)
