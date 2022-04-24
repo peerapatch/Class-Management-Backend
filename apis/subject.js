@@ -34,7 +34,8 @@ router.post('/api/subject', async (req, res) => {
       credit: req.body.credit,
       period: req.body.period,
       remark: req.body.remark,
-      capacity: req.body.capacity
+      capacity: req.body.capacity,
+      year: req.body.year
     }
 
   )

@@ -11,7 +11,8 @@ const subjectSchema = new Schema({
   faculty: { type: String },
   major: { type: String },
   period: { type: Array },
-  remark: { type: String }
+  remark: { type: String },
+  year: { type: String }
 
 })
 module.exports = mongoose.model('subject', subjectSchema)
